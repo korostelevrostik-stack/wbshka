@@ -1,5 +1,5 @@
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,6 +15,7 @@ class Config:
     db_path: str
     log_level: str
     proxy_url: str | None
+    categories: list[str] = field(default_factory=list)
 
 
 def load_config() -> Config:
@@ -27,6 +28,11 @@ def load_config() -> Config:
         db_path=os.getenv("DB_PATH", "data/wb_bot.db"),
         log_level=os.getenv("LOG_LEVEL", "INFO"),
         proxy_url=os.getenv("PROXY_URL") or None,
+        categories=[
+            c.strip()
+            for c in os.getenv("CATEGORIES", "").split(",")
+            if c.strip()
+        ],
     )
 
 
