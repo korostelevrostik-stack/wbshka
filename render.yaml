@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: wb-catalog-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    plan: free
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: CHANNEL_ID
+        sync: false
+      - key: CATEGORIES
+        sync: false
+      - key: MIN_PRICE
+        value: "1000"
+      - key: SCAN_INTERVAL
+        value: "30"
+      - key: WB_DEST
+        value: "-1257786"
+      - key: LOG_LEVEL
+        value: "INFO"
